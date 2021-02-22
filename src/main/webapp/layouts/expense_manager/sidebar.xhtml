@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<!-- 	<div class="sidebar" data-image="../assets/img/sidebar-5.jpg" > -->
+	<div class="sidebar" data-image="#{request.contextPath}/assets/img/sidebar-4.jpg" data-color="green">
+		<!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+		<div class="sidebar-wrapper">
+			<div class="logo">
+				<a href="#{request.contextPath}" class="simple-text"> Expense
+					Manage </a>
+			</div>
+			<ul class="nav">
+				<li><a class="nav-link" href="#{request.contextPath}/expense"> <i
+						class="nc-icon nc-chart-pie-35"></i>
+						<p>Dashboard</p>
+				</a></li>
+				<li class="nav-item">
+					<a class="nav-link" href="#{request.contextPath}/expense/history/month">
+						<i class="nc-icon nc-notes"></i>
+						<p>
+							<h:outputText value="#{currentDate}">
+								<f:convertDateTime pattern="MMMM" />
+							</h:outputText> Expense
+						</p>
+					</a>
+				</li>
+				<li><a class="nav-link" href="#{request.contextPath}/expense/history"> <i
+						class="nc-icon nc-paper-2"></i>
+						<p>Expense History</p>
+				</a></li>
+				<li><a class="nav-link" href="#{request.contextPath}/expense/record"> <i
+						class="nc-icon nc-simple-add"></i>
+						<p>Record Expense</p>
+				</a></li>
+				<li><a class="nav-link" href="#{request.contextPath}/expense/viewQuotaLimit"> <i
+						class="nc-icon nc-cctv"></i>
+						<p>Quota Limit</p>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Expense Management - Register</title>
+	
+	<!-- Icons font CSS-->
+    <link href="#{request.contextPath}/assets/login_vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all" />
+    
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet" />
+
+    <!-- Vendor CSS-->
+    <link href="#{request.contextPath}/assets/login_vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link href="#{request.contextPath}/assets/login_vendor/daterangepicker/daterangepicker.css" rel="stylesheet" media="all" />
+
+    <!-- Main CSS-->
+    <link href="#{request.contextPath}/assets/css/register_main.css" rel="stylesheet" media="all" />
+</h:head>
+
+<h:body>
+	<div class="page-wrapper bg-red p-t-180 p-b-100 font-robo" style="background: #ebeeef;">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2" style="position: relative;">
+                <div class="card-heading"></div>
+                <div class="card-frame"></div>
+                <div class="card-body">
+                    <h2 class="title">Registration Info</h2>
+                    <c:if test="${not empty REGISTER_MESSAGE}">
+						<div class="container">
+							<small><h:outputText value="*#{request.getAttribute('REGISTER_MESSAGE')}" style="color: #FF4A55"/></small>
+						</div>
+			        </c:if>
+                    <h:form method="post" id="regForm" onsubmit="checkForm();">
+                        <div class="input-group">
+                            <h:inputText pt:placeholder="Username" styleClass="input--style-2" value="#{userBean.user.username}" required="true" maxlength="15"/>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="input-group">
+                                    <h:inputText pt:placeholder="Email" value="#{userBean.user.email}" styleClass="input--style-2" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                        	<div class="col">
+                        		<div class="input-group">
+                        			<h:inputText pt:placeholder="Phone number" value="#{userBean.user.phoneNumber}" styleClass="input--style-2" required="true" maxlength="11"/>
+                        		</div>
+                        	</div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <h:inputSecret pt:placeholder="Password" value="#{userBean.user.password}" styleClass="input--style-2" id="pass" required="true"/>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <input class="input--style-2" type="password" placeholder="Re-type password" id="rtPass" required="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-30">
+<!--                             <button class="btn btnradius btngreen" type="submit">Search</button> -->
+                            <h:commandButton action="#{userBean.registerSubmit()}" value="Register now" class="btn btn--radius btn--green"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Jquery JS-->
+    <script src="#{request.contextPath}/assets/js/core/jquery.3.2.1.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="#{request.contextPath}/assets/login_vendor/select2/select2.min.js"></script>
+    <script src="#{request.contextPath}/assets/login_vendor/daterangepicker/moment.min.js"></script>
+    <script src="#{request.contextPath}/assets/login_vendor/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="#{request.contextPath}/assets/js/register_global.js"></script>
+    
+    <script>
+    	const checkForm = () => {
+    		let password = $(document.getElementById("regForm:pass"))
+    		let repassword = $("#rtPass")
+    		let check = password.val() == repassword.val();
+    		
+    		if(!check){
+    			alert("Re-type password is not the same as password");
+    			event.preventDefault();
+    			return false;
+    		}
+    	}
+    </script>
+</h:body>
+</html>

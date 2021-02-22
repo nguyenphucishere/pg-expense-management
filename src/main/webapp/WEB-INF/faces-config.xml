@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xi="http://www.w3.org/2001/XInclude" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ 
+	<navigation-rule>
+	   <from-view-id>/change-password.xhtml</from-view-id>
+	   <navigation-case>
+	      <from-outcome>success</from-outcome>
+	      <to-view-id>/infoPages/changePasswordSuccess.jsf</to-view-id>
+	   </navigation-case>
+	   <navigation-case>
+	      <from-outcome>denied</from-outcome>
+	      <to-view-id>/login</to-view-id>
+	      <redirect/>
+	   </navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+	   <from-view-id>/verify-code.xhtml</from-view-id>
+	   <navigation-case>
+	      <from-outcome>success</from-outcome>
+	      <to-view-id>/change-password.jsf</to-view-id>
+	   </navigation-case>
+	   <navigation-case>
+	      <from-outcome>denied</from-outcome>
+	      <to-view-id>/login</to-view-id>
+	      <redirect/>
+	   </navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+	   <from-view-id>/forgot-password.xhtml</from-view-id>
+	   <navigation-case>
+	      <from-outcome>success</from-outcome>
+	      <to-view-id>/verify-code.jsf</to-view-id>
+	   </navigation-case>
+	   <navigation-case>
+	      <from-outcome>denied</from-outcome>
+	      <to-view-id>/login</to-view-id>
+	      <redirect/>
+	   </navigation-case>
+	</navigation-rule>
+	
+	<managed-bean>
+	    <managed-bean-name>currentDate</managed-bean-name>
+	    <managed-bean-class>java.util.Date</managed-bean-class>
+	    <managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+</faces-config>

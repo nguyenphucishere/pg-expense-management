@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>expenseBean.selectedExpense Management</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="../layouts/expense_manager/main.xhtml">
+		<ui:define name="content">
+			<div class="container-fuild">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header text-center">
+								<h4 class="card-title">Spending money in 
+									<h:outputText value="#{currentDate}">
+										<f:convertDateTime pattern="MMMM" />
+									</h:outputText>
+								</h4>
+							</div>
+							<div class="card-body">
+								<canvas id="chartOne"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-header text-center">
+								<h4 class="card-title">Spending money in each category
+								</h4>
+							</div>
+							<div class="card-body">
+								<canvas id="chartThree"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header text-center">
+								<h4 class="card-title">Spending money in 
+									<h:outputText value="#{currentDate}">
+										<f:convertDateTime pattern="YYYY" />
+									</h:outputText>
+								</h4>
+							</div>
+							<div class="card-body">
+								<canvas id="chartTwo"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+		<ui:define name="scripts">
+			<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+			<script>
+				const MONTHS = [false, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+				
+				const dataLabel1 = #{expenseBean.getLabelAnDataForChartOne()[0]};
+				const data1 = #{expenseBean.getLabelAnDataForChartOne()[1]};
+				
+				const dataLabel2 =  #{expenseBean.getLabelAnDataForChartTwo()[0]};
+				const data2 =  #{expenseBean.getLabelAnDataForChartTwo()[1]};
+				
+				const dataLabel3 =  #{expenseBean.getLabelAnDataForChartThree()[0]};
+				const data3 =  #{expenseBean.getLabelAnDataForChartThree()[1]};
+			</script>
+			<script src="#{request.contextPath}/assets/js/drawChart.js"></script>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

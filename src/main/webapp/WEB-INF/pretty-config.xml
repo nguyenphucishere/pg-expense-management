@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<pretty-config
+	xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<url-mapping id="expenseDashboard">
+		<pattern value="/expense" />
+		<view-id value="/expense_management/index.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="expenseMonthHistory">
+		<pattern value="/expense/history/month" />
+		<view-id value="/expense_management/monthlyExpenseHistory.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="expenseHistory">
+		<pattern value="/expense/history" />
+		<view-id value="/expense_management/history.jsf" />
+	</url-mapping>
+
+	<url-mapping id="expenseHistoryEdit">
+		<pattern value="/expense/edit/#{id}" />
+		<view-id value="/expense_management/edit.jsf" />
+	</url-mapping>
+
+	<url-mapping id="expenseHistoryDelete">
+		<pattern value="/expense/delete/#{id}" />
+		<action>#{expenseBean.deleteExpense(id)}</action>
+	</url-mapping>
+	
+	<url-mapping id="expenseHistoryRecord">
+		<pattern value="/expense/record" />
+		<view-id value="/expense_management/record.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/login.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="register">
+		<pattern value="/register" />
+		<view-id value="/register.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="logout">
+		<pattern value="/logout" />
+		<action>#{userBean.logOut()}</action>
+	</url-mapping>
+	
+	<url-mapping id="quotaLimit">
+		<pattern value="/expense/viewQuotaLimit" />
+		<view-id value="/expense_management/quotaLimit.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="forgotPassword">
+		<pattern value="/forgotPassword" />
+		<view-id value="/forgot-password.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="forgotPassword">
+		<pattern value="/forgotPassword/next-step" />
+		<view-id value="/verify-code.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="forgotPassword">
+		<pattern value="/forgotPassword/success" />
+		<view-id value="/infoPages/changePasswordSuccess.jsf" />
+	</url-mapping>
+	
+
+</pretty-config>

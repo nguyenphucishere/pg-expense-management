@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Expense Management</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="../layouts/expense_manager/main.xhtml">
+		<ui:define name="content">
+			<div class="container-fluild">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>View Quota Limit</h4>
+							</div>
+							<div class="card-body">
+								<c:if test="#{expenseBean.currentUser.quota != 0}">
+									<h:outputText value="Your quota limit is: $#{expenseBean.currentUser.quota}"/><br/>
+									<c:if test="#{(expenseBean.currentUser.quota - expenseBean.getTotalMoneyInMonth()) ge 0}">
+										<h:outputText value="Remaining amount: $"/>
+										<h:outputText value="#{expenseBean.currentUser.quota - expenseBean.getTotalMoneyInMonth()}">
+											<f:convertNumber pattern="#0.00" />
+										</h:outputText>
+									</c:if>
+									<c:if test="#{(expenseBean.currentUser.quota - expenseBean.getTotalMoneyInMonth()) lt 0}">
+										<h:outputText value="Amount exceeded allowed: $" styleClass="text-danger"/>
+										<h:outputText value="#{-(expenseBean.currentUser.quota - expenseBean.getTotalMoneyInMonth())}" styleClass="text-danger">
+											<f:convertNumber pattern="#0.00" />
+										</h:outputText>
+									</c:if>
+								</c:if>
+								<c:if test="#{expenseBean.currentUser.quota == 0}">
+									<h:outputText value="You didn't set your quota limit yet !!!"/>
+								</c:if>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>Edit Quota Limit</h4>
+							</div>
+							<div class="card-body">
+								<small class="text-muted">Set to 0 if you want to remove the limit</small>
+								<h:form method="POST" id="edit_quota_form">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label>Quota value</label>
+												<h:inputText value="#{expenseBean.currentUser.quota}"
+													styleClass="form-control" />
+											</div>
+										</div>
+										<div class="col-md-12">
+											<h:commandButton value="Update" styleClass="btn btn-info float-right" action="#{expenseBean.setUserQuota()}"/>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

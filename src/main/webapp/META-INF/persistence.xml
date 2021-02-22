@@ -1,0 +1,18 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<persistence-unit name="pgExpensePersistenceUnit">
+		<jta-data-source>pgExpenseDataSource</jta-data-source>
+
+		<class>web.entity.Expense</class>
+		<class>web.entity.Category</class>
+		<class>web.entity.User</class>
+		<class>web.entity.UserIssue</class>
+
+		<properties>
+			<property name="openjpa.jdbc.SynchronizeMappings"
+				value="buildSchema(ForeignKeys=true)" />
+		</properties>
+	</persistence-unit>
+</persistence>

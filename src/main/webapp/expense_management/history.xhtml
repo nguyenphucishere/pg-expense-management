@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Expense Management</title>
+</h:head>
+
+<h:body>
+
+	<ui:composition template="../layouts/expense_manager/main.xhtml">
+
+		<ui:define name="content">
+			#{expenseBean.getAllExpenses()}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card strpied-tabled-with-hover">
+							<div class="card-header">
+								<h4 class="card-title">
+									Expense History
+								</h4>
+								<p class="card-category"></p>
+							</div>
+							<div class="card-body table-responsive p-4">
+								<h:dataTable var="expense" value="#{expenseBean.expenses}"
+									id="expenseList" styleClass="table-hover">
+									
+									<h:column>
+										<f:facet name="header">Category Name</f:facet>
+										<h:outputText value="#{expense.category.categoryName}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">Money</f:facet>
+										<h:outputText value="$"/>
+										<h:outputText value="#{expense.value}" class="spend-money"/>						
+									</h:column>
+									<h:column>
+										<f:facet name="header" id="ok">Note</f:facet>
+										<h:outputText value="#{expense.note}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header"></f:facet>
+										<a href="#{request.contextPath}/expense/edit/#{expense.id}"
+											class="text-info"><i class="nc-icon nc-settings-gear-64"></i></a>
+									</h:column>
+									<h:column>
+										<f:facet name="header"></f:facet>
+										<a href="#{request.contextPath}/expense/delete/#{expense.id}"
+											class="text-danger"><i class='nc-icon nc-simple-remove'></i></a>
+									</h:column>
+									<h:column>
+										<h:outputText value="On " />
+										<h:outputText value="#{expense.created_date}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+									</h:column>
+								</h:dataTable>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+		<ui:define name="scripts">
+			<link rel="stylesheet" href="//cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+			<script>
+				$('#expenseList').DataTable({
+					order: [[5, 'desc']],
+			        rowGroup: {
+			            dataSrc: [ 5 ]
+			        },
+			        columnDefs: [{
+			            targets: [ 5 ],
+			            visible: false
+			        }], info: false
+			    });
+			</script>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

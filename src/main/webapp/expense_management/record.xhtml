@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Expense Management</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="../layouts/expense_manager/main.xhtml">
+		<ui:define name="content">
+			<div class="container-fluild">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>Record Expense</h4>
+							</div>
+							<div class="card-body">
+								<h:form method="POST" id="edit_form">
+									<div class="row">
+										<div class="col-md-1">
+											<div class="form-group">
+												<label>ID</label>
+												<h:inputText disabled="true" value="#{param.id}"
+													styleClass="form-control" />
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="form-group">
+												<label>Category name</label>
+
+<!-- 												<h:inputText -->
+<!-- 													value="#{expenseBean.selectedExpense.category_name}" -->
+<!-- 													styleClass="form-control" placeholder="Category Name" pt:list="nameList"/> -->
+<!-- 												<datalist id="nameList"> -->
+<!-- 													<ui:repeat value="#{expenseBean.getAllCategoryName()}" var="category_name"> -->
+<!-- 												    	<option value="#{category_name}"></option> -->
+<!-- 												    </ui:repeat> -->
+<!-- 												</datalist> -->
+												<h:selectOneListbox value="#{expenseBean.selectedExpense.category.id}" size="1" styleClass="form-control">
+													<c:forEach items="#{expenseBean.getAllCategory()}" var="category">
+														<f:selectItem itemValue="#{category.id}" itemLabel="#{category.categoryName}" />   
+													</c:forEach>
+												</h:selectOneListbox>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="form-group">
+												<label>Spent Money</label>
+												<div class="input-group">
+													<div class="input-group-prepend" style="height: 40px">
+														<span class="input-group-text">$</span>
+													</div>
+													<h:inputText placeholder="How much did you spend ?"
+														value="#{expenseBean.selectedExpense.value}"
+														styleClass="form-control" />
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Expense Date</label>
+												<h:inputText
+													value="#{expenseBean.selectedExpense.created_date}"
+													styleClass="form-control" type="date" id="date_inp">
+													<f:convertDateTime pattern="yyyy-MM-dd" />
+												</h:inputText>
+												<script type="text/javascript">
+													let inp = document.getElementById('edit_form:date_inp');
+													inp.setAttribute("type", "date");
+												</script>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Note</label>
+												<h:inputTextarea value="#{expenseBean.selectedExpense.note}"
+													style="height: auto" class="form-control" rows="4" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<h:commandButton id="cmd-btn"
+												class="btn btn-success float-right"
+												style="background-color: #28a745;color:white;border-color: #28a745;"
+												value="Record" action="#{expenseBean.editOrCreateExpense()}" />
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
