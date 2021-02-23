@@ -81,7 +81,6 @@ public class UserBean implements Serializable{
 		if(!userService.isValidUser(user)) {
 			
 			setRequestAttribute(Config.LOGIN_MESSAGE, "Login fail! Please check your username or password");
-
 			return null;
 		}
 		
@@ -91,9 +90,13 @@ public class UserBean implements Serializable{
 		userSession.setId(resUser.getId());
 		userSession.setAdmin(false);
 		
-		SessionManage.setSessionAge(24 * 60); // a day
+		final int MINS_IN_DAY = 24 * 60;
+		
+		SessionManage.setSessionAge(MINS_IN_DAY);
 		SessionManage.setSession(Config.LOGIN_SESSION, userSession);
-		SessionManage.setSessionAge(24 * 60); // a day
+		SessionManage.setSessionAge(MINS_IN_DAY);
+		
+		System.out.println("huh");
 		
 		return "pretty:expenseDashboard";
 	}
