@@ -34,9 +34,6 @@ public class UserService extends ApplicationServiceManager implements Serializab
 		
 		query.setParameter("username", user.getUsername());
 		query.setParameter("password", user.getPassword());
-		
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
 
 //		String queryStr = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password";
 //		TypedQuery<User> query = 
