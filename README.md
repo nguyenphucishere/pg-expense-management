@@ -8,4 +8,4 @@ A tool that help you manage your expense ;) or just ... calculate numbers
 
 -- Copyright Phuc. All right right reserved
 
--- Please credit when downloading my code. Please 😢
+-- Please credit when downloading my code.
