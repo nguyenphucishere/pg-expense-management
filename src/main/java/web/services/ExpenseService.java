@@ -34,10 +34,6 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		String queryStr = "SELECT e FROM Expense e "
 				+ "WHERE FUNC('MONTH', e.created_date) = FUNC('MONTH', CURRENT_DATE) AND" + whereClauseWithUserID
 				+ " AND FUNC('YEAR', e.created_date) = FUNC('YEAR', CURRENT_DATE)";
-		
-//		String queryStr = "SELECT e FROM Expense e "
-//		+ "WHERE MONTH(e.created_date) = MONTH(CURRENT_DATE) AND" + whereClauseWithUserID
-//		+ " AND YEAR(e.created_date) = YEAR(CURRENT_DATE)";
 
 		TypedQuery<Expense> query = 
 				entityManager.createQuery(queryStr, Expense.class);
@@ -70,7 +66,6 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		Expense editingEx = entityManager.find(Expense.class, expense.getId());
 		
 		editingEx.setValue(expense.getValue());
-		//editingEx.setCategoryID(expense.getCategoryID());
 		editingEx.setCreated_date(expense.getCreated_date());
 		editingEx.setNote(expense.getNote());
 		editingEx.setCategory(expense.getCategory());
@@ -89,28 +84,7 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		
 		return query.getResultList();
 	}
-	
-//	public List<String> getAllCategoryName(){
-//		String queryStr = "SELECT DISTINCT e.category_name FROM Expense e "
-//				+ "WHERE FUNC('MONTH', e.created_date) = FUNC('MONTH', CURRENT_DATE) "
-//				+ "AND FUNC('YEAR', e.created_date) = FUNC('YEAR', CURRENT_DATE)";
-//		TypedQuery<String> query = 
-//				entityManager.createQuery(queryStr, String.class);
-//		
-//		System.out.println(query.getResultList());
-//		
-//		return query.getResultList();
-//	}
-	
-	
-	/**
-	 * get Spend Money Each Month In Current Year
-	 * 
-	 * @param none
-	 * 
-	 * @return List<Object[]>
-	 * 
-	 */
+
 	public List<Object[]> getSpendMoneyEachMonthInYear(){
 		String queryStr = "SELECT FUNC('MONTH', e.created_date), FUNC('SUM', e.value) FROM Expense e "
 				+ "WHERE FUNC('YEAR', e.created_date) = FUNC('YEAR', CURRENT_DATE) AND" + whereClauseWithUserID
@@ -138,7 +112,11 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		TypedQuery<Double> query = 
 				entityManager.createQuery(queryStr, Double.class);
 		
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		}catch(Exception e) {
+			return 0F;
+		}
 	}
 	
 }

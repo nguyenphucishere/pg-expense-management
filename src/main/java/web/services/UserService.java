@@ -34,13 +34,6 @@ public class UserService extends ApplicationServiceManager implements Serializab
 		
 		query.setParameter("username", user.getUsername());
 		query.setParameter("password", user.getPassword());
-
-//		String queryStr = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password";
-//		TypedQuery<User> query = 
-//				entityManager.createQuery(queryStr, User.class);
-//		
-//		query.setParameter("username", user.getUsername());
-//		query.setParameter("password", Hash.getMd5(user.getPassword()));
 		
 		try {
 			return query.getSingleResult();
@@ -53,25 +46,6 @@ public class UserService extends ApplicationServiceManager implements Serializab
 	}
 	
 	public boolean isValidUser(User user) {
-		
-//		String queryStr = "SELECT u FROM User u WHERE u.username = :username";
-//		TypedQuery<User> query = 
-//				entityManager.createQuery(queryStr, User.class);
-//		
-//		query.setParameter("username", user.getUsername());
-//		
-//		try {
-//			
-//			User fuser = query.getSingleResult();
-//			System.out.println(fuser.getPassword());
-//			System.out.println(Hash.getMd5(user.getPassword()));
-//			return Hash.getMd5(user.getPassword()).equals(fuser.getPassword());
-//			
-//		}catch(Exception e) {
-//			System.out.println(e.getMessage());
-//			System.out.println("Hello ku");
-//			return false;
-//		}
 		
 		return getUserByUserNameAndPassword(user) != null;
 	}
