@@ -30,7 +30,7 @@ public class AuthenticationFilter extends HttpFilter{
         UserSession session = (UserSession)req.getSession().getAttribute(Config.LOGIN_SESSION);
         
         if (session == null) {
-            req.setAttribute("LOGIN_MESSAGE", "You need to login to access that page");
+            req.setAttribute(Config.LOGIN_MESSAGE, "You need to login to access that page");
             RequestDispatcher dispatcher = req.getRequestDispatcher("/login");
             dispatcher.forward(req, res);
         } else {
