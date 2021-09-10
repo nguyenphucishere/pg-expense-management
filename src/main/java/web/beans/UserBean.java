@@ -96,8 +96,6 @@ public class UserBean implements Serializable{
 		SessionManage.setSession(Config.LOGIN_SESSION, userSession);
 		SessionManage.setSessionAge(MINS_IN_DAY);
 		
-		System.out.println("huh");
-		
 		return "pretty:expenseDashboard";
 	}
 	
