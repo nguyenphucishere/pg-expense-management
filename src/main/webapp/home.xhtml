@@ -119,9 +119,16 @@
                 </h1>
 
                 <div class="home-content__buttons">
-                    <a href="#{request.contextPath}/login" class="btn btn--stroke">
-                        Get Started
-                    </a>
+                    <c:if test="#{empty sessionScope.LOGIN_SESSION}">
+                        <a href="#{request.contextPath}/login" class="btn btn--stroke">
+                            Get Started
+                        </a>
+                    </c:if>
+                    <c:if test="#{not empty sessionScope.LOGIN_SESSION}">
+                        <a href="#{request.contextPath}/expense" class="btn btn--stroke">
+                            Manage Expense
+                        </a>
+                    </c:if>
                     <a href="#about" class="smoothscroll btn btn--stroke">
                         More About Us
                     </a>

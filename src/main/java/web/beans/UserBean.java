@@ -159,18 +159,18 @@ public class UserBean implements Serializable{
 		}
 		
 		final String randomString = new RandomString(6).nextString();
-		
-		try {
 			
+		try {
 			EmailUtility.sendEmail(
 					Config.EMAIL_HOST, Config.EMAIL_PORT, 
 					Config.EMAIL_USERNAME, Config.EMAIL_PASSWORD, 
 					user.getEmail(), "Change password", "Hello. It's look like you forgot your password\nHere is your verification code: " + randomString + "\nIt will expired in 10 minutes");
-			
-		} catch (Exception e) {
+		} catch (AddressException e) {
 
-			setRequestAttribute(Config.FORGOT_P_MESSAGE, "Error to send email, please check your email account ! Error: " + e.getMessage());
-			return null;
+			e.printStackTrace();
+		} catch (MessagingException e) {
+
+			e.printStackTrace();
 		}
 		
 		SessionManage.setSessionAge(10);

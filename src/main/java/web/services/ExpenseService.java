@@ -47,7 +47,11 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 				entityManager.createQuery(queryStr, Expense.class);
 		query.setParameter("id", id);
 
-		return query.getSingleResult();
+		try {
+			return query.getSingleResult();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	@Transactional
@@ -82,7 +86,11 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		TypedQuery<Object[]> query = 
 				entityManager.createQuery(queryStr, Object[].class);
 		
-		return query.getResultList();
+		try {
+			return query.getResultList();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 
 	public List<Object[]> getSpendMoneyEachMonthInYear(){
@@ -92,7 +100,11 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		TypedQuery<Object[]> query = 
 				entityManager.createQuery(queryStr, Object[].class);
 		
-		return query.getResultList();
+		try {
+			return query.getResultList();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Object[]> getSumOfExpenseMoneyInEachCategory(){
@@ -102,7 +114,11 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		TypedQuery<Object[]> query = 
 				entityManager.createQuery(queryStr, Object[].class);
 		
-		return query.getResultList();
+		try {
+			return query.getResultList();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	public double getTotalMoneyInMonth() {
@@ -112,6 +128,7 @@ public class ExpenseService extends ApplicationServiceManager implements Seriali
 		TypedQuery<Double> query = 
 				entityManager.createQuery(queryStr, Double.class);
 		
+		System.out.print(true);
 		try {
 			return query.getSingleResult();
 		}catch(Exception e) {
